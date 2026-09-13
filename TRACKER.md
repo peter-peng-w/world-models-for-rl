@@ -1,3 +1,5 @@
+[Read the paper takeaways before starting](#paper-takeaways) — key ideas, reading focus, and questions for all 18 papers and surveys.
+
 # World-model learning tracker
 
 A working notebook for understanding action-conditioned dynamics, planning, and policy learning. **Reading priority, reading progress, and demonstrated understanding are separate fields.**
@@ -197,3 +199,118 @@ For field updates, add promising resources to the inbox first, check their relev
 | — | — | — | — | — |
 
 No automated monitoring, reminders, or summary counters are enabled. This tracker is designed for direct editing in GitHub.
+
+
+## Paper takeaways
+
+Pre-reading briefs for all **15 research papers and 3 survey/tutorial papers** in the register. The seven T-series entries are blogs, lectures, workshops, or slides; their existing reading prompts remain above. Checked against the linked primary abstracts and author/project summaries on **2026-09-13**; these are orientation notes, not full-paper reviews or independent replications. “Focus” and “Question” are suggested reading tasks. Recent preprint summaries describe the authors' proposals, not established general conclusions.
+
+### F01 — World Models
+
+**Takeaway:** A large predictive model can supply compact visual and memory features to a small controller. The paper also demonstrates training a controller inside a learned latent environment and transferring it to the real task. [Author article](https://worldmodels.github.io/)
+
+**Focus:** The vision–memory–controller split; action-conditioned recurrent prediction; which experiment trains the controller in the real environment versus the learned one. **Question:** How can a controller exploit an imperfect model, and what does adding stochasticity address?
+
+### F02 — PlaNet
+
+**Takeaway:** Learn dynamics from images, then choose actions by online planning in latent space. Its recurrent state-space model combines deterministic memory and stochastic state; multi-step training is intended to make predictions useful beyond one step. [Author project](https://planetrl.github.io/)
+
+**Focus:** State inference versus imagined prediction; reward prediction; latent overshooting; the loop of optimize an action sequence, execute the first action, observe, and replan. **Question:** Why does a good image reconstruction not guarantee a good plan?
+
+### F03 — MBPO
+
+**Takeaway:** The way you use a model can matter as much as its accuracy. Short synthetic rollouts starting from real replay states can improve policy learning while limiting the damage from compounding model error. [Paper](https://arxiv.org/abs/1906.08253)
+
+**Focus:** Branched rollout construction, rollout length, mixing real and synthetic data, and the gap between theoretical bounds and practical model usage. **Question:** Why can short model rollouts still help solve a long-horizon task? This is primarily model-generated data for policy optimization, not an online trajectory planner.
+
+### P01 — Dreamer
+
+**Takeaway:** Use latent imagination to train an actor and value function. The original Dreamer propagates gradients of imagined returns through learned dynamics; value estimates account for outcomes beyond the finite imagination horizon. [Paper](https://arxiv.org/pdf/1912.01603.pdf)
+
+**Focus:** Separate model learning, behavior learning, and real interaction. Trace the actor objective and value targets, and distinguish finite rollouts from long-term return estimation. **Question:** What computation happens during training versus when the trained actor selects an action? Compare this directly with PlaNet.
+
+### P02 — DreamerV3
+
+**Takeaway:** The central contribution is making imagination-based RL work robustly across diverse domains with a shared configuration. Normalization, balancing, and target transformations stabilize the learning system; the model–actor–critic structure remains central. [Author preprint](https://arxiv.org/abs/2301.04104) · [2025 publication](https://www.nature.com/articles/s41586-025-08744-2)
+
+**Focus:** Which stabilization choices handle varying observation, reward, and return scales; which ablations support them. **Question:** Does “one configuration across tasks” mean one jointly trained agent, or separate task training with shared hyperparameters? Do not conflate those claims. The preprint began in 2023; the tracker uses the 2025 publication year.
+
+### P03 — TD-MPC
+
+**Takeaway:** Combine short-horizon planning with a learned terminal value to estimate longer-term return. The latent dynamics model is task-oriented: useful predictions for reward and control matter more than reconstructing every visual detail. [Author project](https://www.nicklashansen.com/td-mpc/)
+
+**Focus:** The joint model/value learning objective, latent consistency, and how the terminal value enters trajectory scoring. **Question:** How is work divided between the model, value function, policy, and trajectory optimizer? Compare online planning here with Dreamer's deployment actor.
+
+### P04 — TD-MPC2
+
+**Takeaway:** A series of improvements makes decoder-free latent MPC more robust and scalable, including broad continuous-control evaluation and multi-task agents. Treat it as a refinement and scaling of the TD-MPC recipe, not a completely different meaning of world model. [Author project](https://www.tdmpc2.com/)
+
+**Focus:** Changes relative to TD-MPC, their ablations, and how tasks with different embodiments and action spaces are handled. **Question:** Which gains come from algorithm changes, model size, or more data? Separate single-task evaluation from the multi-task setting.
+
+### P05 — MuZero
+
+**Takeaway:** A planning model need not recreate observations. MuZero learns recurrent predictions of reward, value, and policy that support tree search, showing a powerful alternative to training a general observation predictor. [Paper](https://arxiv.org/abs/1911.08265)
+
+**Focus:** Representation, recurrent dynamics, and prediction components; how search uses their outputs and supplies policy-training targets. **Question:** Which information can the hidden state discard while still supporting useful search? Avoid assuming its hidden states are a faithful simulator of the entire environment.
+
+### P06 — Value Equivalence Principle
+
+**Takeaway:** Two models can be equally useful for a specified planning problem even when their transition predictions differ. The formal criterion is matching Bellman updates for chosen sets of policies and value functions. [Paper](https://arxiv.org/abs/2011.03506)
+
+**Focus:** The precise definition and its quantifiers. Increasing the policy/function sets makes equivalence more demanding. **Question:** What new tasks or policies could break an equivalence learned for a restricted set? This is stronger and more precise than saying two models have the same value under one policy.
+
+### J01 — DINO-WM
+
+**Takeaway:** Predict future pretrained DINOv2 patch features from offline action trajectories, then optimize action sequences toward the features of a goal image. This connects representation prediction directly to goal-directed control without requiring pixel reconstruction or a learned reward model. [Author project](https://dino-wm.github.io/)
+
+**Focus:** What the pretrained encoder provides, what dynamics training learns, and how predicted features score candidate actions. **Question:** When might feature similarity disagree with reachability or task completion? “Zero-shot” refers to the described test-time behavior setting, not learning dynamics with no data.
+
+### J02 — V-JEPA 2
+
+**Takeaway:** Large-scale action-free video pretraining supplies representations, while a separate action-conditioned post-training stage produces V-JEPA 2-AC for robotic planning with image goals. Those stages answer different questions. [Paper](https://arxiv.org/abs/2506.09985)
+
+**Focus:** Prioritize the action-conditioned model, robot trajectory data, planning objective, and deployment experiments over video recognition or question-answering benchmarks. **Question:** What can web video pretraining teach, and what still requires action-labeled interaction? Self-supervised representation learning alone is not an RL policy-learning algorithm.
+
+### J03 — LeWorldModel
+
+**Takeaway:** The authors propose end-to-end JEPA training from pixels using next-embedding prediction plus a regularizer encouraging Gaussian-distributed embeddings. The key issue is learning useful latent dynamics while avoiding collapsed representations, without relying on a large pretrained encoder. [Paper, v3](https://arxiv.org/abs/2603.19312v3)
+
+**Focus:** The two losses, the role of the regularizer, and evidence connecting representation quality to actual planning. **Question:** Does preventing collapse also preserve every distinction needed for your task? Inspect control ablations rather than treating latent probes as sufficient evidence. This is a recent research proposal.
+
+### R01 — Dreamer 4
+
+**Takeaway:** The paper scales world-model-based behavior learning toward training an agent from offline data. It combines a fast predictive model with RL in imagination and reports long-horizon Minecraft behavior learned without additional environment interaction. [Paper](https://arxiv.org/abs/2509.24527)
+
+**Focus:** Separate world-model training, action conditioning, and policy training. Read how shortcut forcing and the transformer design make repeated imagination practical. **Question:** What offline data and task supervision are available, and how is policy exploitation of model errors evaluated? For your interests, the imagined RL loop matters more than video appearance alone.
+
+### R02 — Temporal-Distance JEPA
+
+**Takeaway:** Accurate short-horizon feature prediction does not automatically give a useful measure of goal progress. The authors mine a directed temporal cost from offline trajectories, using it either as a planning cost or as a representation-training signal. [Paper, v2](https://arxiv.org/abs/2607.25337v2)
+
+**Focus:** Same-trajectory temporal targets, heuristic cross-trajectory negatives, rollout consistency, and the distinction between deploying the learned cost and retaining Euclidean goal scoring. **Question:** Could trajectory order or missing transitions bias the inferred notion of progress? Treat the reported benchmark gains as preliminary evidence, not a universal planning advantage.
+
+### R03 — Reinforced Planning with Latent World Models
+
+**Takeaway:** Rather than only learning a policy or an evaluator, the authors train a neural optimizer to improve multi-step candidate plans. RP1 learns plan evaluation and plan revision offline using imagined rollouts from a pretrained latent world model. [Paper](https://arxiv.org/abs/2608.18669)
+
+**Focus:** What the planner observes, what a plan-update action means, its reinforcement signal, and how it is coupled to the fixed world model. **Question:** Are comparisons fair after accounting for planner-training cost, model calls, and inference parallelism? Distinguish a learned search procedure from a policy that directly outputs environment actions. This is a recent preprint.
+
+### S01 — Model-based Reinforcement Learning: A Survey
+
+**Takeaway:** Model-based RL has two major design problems: learning a dynamics model and deciding how to use it. The survey organizes uncertainty, partial observability, abstraction, planning budgets, and integration with learning and acting. [Survey](https://arxiv.org/abs/2006.16712)
+
+**Focus:** Use the taxonomy to classify PlaNet, Dreamer, TD-MPC, and MuZero. **Question:** If you hold the world model fixed and change its usage, which algorithmic properties change? Read it as the conceptual map for this collection, not as a source covering the latest 2026 methods.
+
+### S02 — World models for physical AI with uncertainty representation and control
+
+**Takeaway:** This survey organizes world models around six design dimensions and emphasizes their role in closed-loop decisions. It connects uncertainty treatment to compounding error, planner exploitation, rollout horizons, and calibration. [Survey](https://link.springer.com/article/10.1007/s44163-026-02122-1)
+
+**Focus:** Prioritize state abstraction, temporal dynamics, uncertainty, and decision coupling. **Question:** Is a method modeling randomness in the environment, uncertainty from limited knowledge, or both—and how does that change the action? Skim broader physical-AI material unless it answers your control questions.
+
+### S03 — From World Models to World Action Models
+
+**Takeaway:** This tutorial clarifies terminology and compares approaches by representation, prediction, and interaction mechanisms. Its scope includes JEPA as well as spatial and simulation-oriented systems, so only part directly matches this repository's focus. [Tutorial, v8](https://arxiv.org/abs/2607.00836v8)
+
+**Focus:** Translate each definition into familiar RL objects: state representation, forward dynamics, objective, policy, and planner. **Question:** Does “action” mean conditioning a prediction on controls, generating actions, or executing a planning loop? Avoid assuming every author's “world action model” denotes the same algorithm.
+
+[Back to resource register](#resource-register) · [Back to top](#world-model-learning-tracker)
