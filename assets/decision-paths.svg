@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Three ways to use a learned world model</title><desc id="desc">Online planning optimizes action sequences; imagination trains an actor; tree search uses reward, value and policy predictions.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#53657d"/></marker></defs>
+<rect width="1200" height="700" fill="#f7f9fc"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#172b4d">
+<text x="45" y="55" font-size="15" font-weight="700" fill="#3a6fad">FROM PREDICTION TO ACTION</text>
+<text x="45" y="102" font-size="33" font-weight="700" fill="#172b4d">Where does the decision computation happen?</text>
+<text x="45" y="180" font-size="23" font-weight="700" fill="#172b4d">01  Online planning</text>
+<text x="45" y="213" font-size="17" font-weight="400" fill="#53657d">PlaNet / TD-MPC</text>
+<rect x="340" y="145" width="255" height="102" rx="14" fill="#fff5e8" stroke="#d7e0eb"/>
+<rect x="340" y="161" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="362" y="182" font-size="22" font-weight="700" fill="#172b4d">Infer current state</text>
+<text x="362" y="217" font-size="17" font-weight="400" fill="#53657d">Real observations</text>
+<path d="M595 195 H612" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="620" y="145" width="255" height="102" rx="14" fill="#fff5e8" stroke="#d7e0eb"/>
+<rect x="620" y="161" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="642" y="182" font-size="22" font-weight="700" fill="#172b4d">Roll out action plans</text>
+<text x="642" y="217" font-size="17" font-weight="400" fill="#53657d">Hypothetical futures</text>
+<path d="M875 195 H892" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="900" y="145" width="255" height="102" rx="14" fill="#fff5e8" stroke="#d7e0eb"/>
+<rect x="900" y="161" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="922" y="182" font-size="22" font-weight="700" fill="#172b4d">Score and act</text>
+<text x="922" y="217" font-size="17" font-weight="400" fill="#53657d">Action selection</text>
+<text x="45" y="345" font-size="23" font-weight="700" fill="#172b4d">02  Imagination</text>
+<text x="45" y="378" font-size="17" font-weight="400" fill="#53657d">Dreamer (through V3)</text>
+<rect x="340" y="310" width="255" height="102" rx="14" fill="#f0edff" stroke="#d7e0eb"/>
+<rect x="340" y="326" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="362" y="347" font-size="22" font-weight="700" fill="#172b4d">Seed model rollouts</text>
+<text x="362" y="382" font-size="17" font-weight="400" fill="#53657d">Training</text>
+<path d="M595 360 H612" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="620" y="310" width="255" height="102" rx="14" fill="#f0edff" stroke="#d7e0eb"/>
+<rect x="620" y="326" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="642" y="347" font-size="22" font-weight="700" fill="#172b4d">Train actor + critic</text>
+<text x="642" y="382" font-size="17" font-weight="400" fill="#53657d">Training</text>
+<path d="M875 360 H892" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="900" y="310" width="255" height="102" rx="14" fill="#f0edff" stroke="#d7e0eb"/>
+<rect x="900" y="326" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="922" y="347" font-size="22" font-weight="700" fill="#172b4d">Deploy actor</text>
+<text x="922" y="382" font-size="17" font-weight="400" fill="#53657d">Decision time</text>
+<text x="45" y="510" font-size="23" font-weight="700" fill="#172b4d">03  Tree search</text>
+<text x="45" y="543" font-size="17" font-weight="400" fill="#53657d">MuZero</text>
+<rect x="340" y="475" width="255" height="102" rx="14" fill="#e9f7f2" stroke="#d7e0eb"/>
+<rect x="340" y="491" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="362" y="512" font-size="22" font-weight="700" fill="#172b4d">Encode observation</text>
+<text x="362" y="547" font-size="17" font-weight="400" fill="#53657d">Real observations</text>
+<path d="M595 525 H612" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="620" y="475" width="255" height="102" rx="14" fill="#e9f7f2" stroke="#d7e0eb"/>
+<rect x="620" y="491" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="642" y="512" font-size="22" font-weight="700" fill="#172b4d">Expand search tree</text>
+<text x="642" y="547" font-size="17" font-weight="400" fill="#53657d">Hypothetical futures</text>
+<path d="M875 525 H892" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="900" y="475" width="255" height="102" rx="14" fill="#e9f7f2" stroke="#d7e0eb"/>
+<rect x="900" y="491" width="5" height="70" rx="2" fill="#377cf6"/>
+<text x="922" y="512" font-size="22" font-weight="700" fill="#172b4d">Choose action</text>
+<text x="922" y="547" font-size="17" font-weight="400" fill="#53657d">Action selection</text>
+<text x="45" y="660" font-size="17" font-weight="400" fill="#53657d">Original schematic • An actor head may also guide MPC or tree search; these are not exclusive categories.</text>
+</g></svg>

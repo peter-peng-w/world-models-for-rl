@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+<title id="title">World models for reinforcement learning</title><desc id="desc">Experience trains a predictive model. The model supports online planning or imagined actor learning. Actions return to the environment.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#53657d"/></marker></defs>
+<rect width="1200" height="670" fill="#f7f9fc"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#172b4d">
+<text x="45" y="54" font-size="15" font-weight="700" fill="#3a6fad">WORLD MODELS FOR REINFORCEMENT LEARNING</text>
+<text x="45" y="99" font-size="34" font-weight="700" fill="#172b4d">Predict action consequences. Improve decisions.</text>
+<text x="45" y="133" font-size="20" font-weight="400" fill="#53657d">A model is one component of a learning-and-control loop.</text>
+<rect x="45" y="200" width="250" height="145" rx="14" fill="#eaf2ff" stroke="#d7e0eb"/>
+<rect x="45" y="216" width="5" height="113" rx="2" fill="#377cf6"/>
+<text x="67" y="237" font-size="22" font-weight="700" fill="#172b4d">Environment</text>
+<text x="67" y="269" font-size="18" font-weight="400" fill="#455b75">Take action a(t)</text>
+<text x="67" y="295" font-size="18" font-weight="400" fill="#455b75">Observe o(t+1), r(t)</text>
+<rect x="360" y="200" width="320" height="145" rx="14" fill="#ffffff" stroke="#d7e0eb"/>
+<rect x="360" y="216" width="5" height="113" rx="2" fill="#377cf6"/>
+<text x="382" y="237" font-size="22" font-weight="700" fill="#172b4d">Experience + state</text>
+<text x="382" y="269" font-size="18" font-weight="400" fill="#455b75">Store action trajectories</text>
+<text x="382" y="295" font-size="18" font-weight="400" fill="#455b75">Infer z(t) from history</text>
+<rect x="750" y="200" width="405" height="145" rx="14" fill="#e9f7f2" stroke="#d7e0eb"/>
+<rect x="750" y="216" width="5" height="113" rx="2" fill="#168b6c"/>
+<text x="772" y="237" font-size="22" font-weight="700" fill="#172b4d">Learned world model</text>
+<text x="772" y="269" font-size="18" font-weight="400" fill="#455b75">Given z(t) and candidate a(t)</text>
+<text x="772" y="295" font-size="18" font-weight="400" fill="#455b75">predict z(t+1), reward / features</text>
+<path d="M295 267 H350" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M680 267 H740" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="360" y="430" width="355" height="145" rx="14" fill="#fff5e8" stroke="#d7e0eb"/>
+<rect x="360" y="446" width="5" height="113" rx="2" fill="#bd7920"/>
+<text x="382" y="467" font-size="22" font-weight="700" fill="#172b4d">Online planning</text>
+<text x="382" y="499" font-size="18" font-weight="400" fill="#455b75">Compare candidate action plans</text>
+<text x="382" y="525" font-size="18" font-weight="400" fill="#455b75">Execute first action; replan</text>
+<rect x="785" y="430" width="370" height="145" rx="14" fill="#f0edff" stroke="#d7e0eb"/>
+<rect x="785" y="446" width="5" height="113" rx="2" fill="#7854bb"/>
+<text x="807" y="467" font-size="22" font-weight="700" fill="#172b4d">Policy learning</text>
+<text x="807" y="499" font-size="18" font-weight="400" fill="#455b75">Train actor in imagined rollouts</text>
+<text x="807" y="525" font-size="18" font-weight="400" fill="#455b75">Use actor to select actions</text>
+<path d="M850 345 V389 H540 V420" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M970 345 V420" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M360 502 H170 V355" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M970 575 V614 H170 V355" fill="none" stroke="#53657d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="54" y="484" font-size="18" font-weight="700" fill="#172b4d">actions</text>
+<text x="45" y="651" font-size="17" font-weight="400" fill="#53657d">Original schematic • Some methods combine both routes; tree search is another model-use pattern.</text>
+</g></svg>
